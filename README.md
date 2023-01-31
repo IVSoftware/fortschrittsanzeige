@@ -19,6 +19,7 @@ For example, in the form Constructor you could go though all the textboxes and a
 
 ***
 - Multiple text boxes can all point to a common event handler.
+- `System.Linq` reduces the amount of code needed for things like matching and sorting. 
 
 What we're able to do is perform a validation based on _all_ the textboxes whenever _any_ textbox changes. 
 
@@ -41,9 +42,11 @@ What we're able to do is perform a validation based on _all_ the textboxes whene
             textbox.BackColor = isValid ? Color.White : Color.LightSalmon;
         }
 
-        // Use System.Linq to count the number of valid
-        // textboxes based on the BackColor set;
-        float countValid = Controls.OfType<TextBox>().Count(_=>_.BackColor== Color.White);
+        // Use System.Linq to count the number of valid textboxes (based on BackColor).
+        float countValid = 
+            Controls
+            .OfType<TextBox>()
+            .Count(_=>_.BackColor== Color.White);
 
         var pct = countValid / TEXTBOX_COUNT;
         Fortschrittsanzeige.Value = (int)(pct * Fortschrittsanzeige.Maximum);
@@ -59,9 +62,9 @@ The handler allows for "special cases" and will make the `Fortschrittsanzeige` g
 ***
 When all textboxes are valid hide `Fortschrittsanzeige` and enable `Sendebutton`.
 
-[![complete][3]][3]
+[![komplett][3]][3]
 
 
   [1]: https://i.stack.imgur.com/Yoym5.png
   [2]: https://i.stack.imgur.com/6W61r.png
-  [3]: https://i.stack.imgur.com/XjpPe.png
+  [3]: https://i.stack.imgur.com/fNTeI.png
